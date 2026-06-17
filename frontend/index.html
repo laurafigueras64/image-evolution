@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How far has AI come?</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <h1>How far has AI come?</h1>
+    <p class="subtitle">Enter a prompt and watch three generations of AI image models bring it to life.</p>
+
+    <div class="input-row">
+      <input
+        type="text"
+        id="prompt"
+        placeholder="a red apple on a wooden table"
+        autocomplete="off"
+      />
+      <button id="generate-btn">Generate</button>
+    </div>
+
+    <div class="cards" id="cards">
+      <div class="card" id="card-sd-v1-4">
+        <div class="card-label">2022 · SD v1.4</div>
+        <div class="card-image-wrap">
+          <div class="placeholder">
+            <span class="placeholder-icon">&#9654;</span>
+          </div>
+          <div class="spinner hidden"></div>
+          <img class="result-img hidden" alt="SD v1.4 result" />
+        </div>
+      </div>
+
+      <div class="card" id="card-sd-v2-1">
+        <div class="card-label">2022 · SD v2.1</div>
+        <div class="card-image-wrap">
+          <div class="placeholder">
+            <span class="placeholder-icon">&#9654;</span>
+          </div>
+          <div class="spinner hidden"></div>
+          <img class="result-img hidden" alt="SD v2.1 result" />
+        </div>
+      </div>
+
+      <div class="card" id="card-sdxl">
+        <div class="card-label">2023 · SDXL</div>
+        <div class="card-image-wrap">
+          <div class="placeholder">
+            <span class="placeholder-icon">&#9654;</span>
+          </div>
+          <div class="spinner hidden"></div>
+          <img class="result-img hidden" alt="SDXL result" />
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
