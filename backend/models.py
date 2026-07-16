@@ -2,18 +2,26 @@ import torch
 from diffusers import DiffusionPipeline
 
 MODEL_REGISTRY = {
-    "sd-v1-4": "CompVis/stable-diffusion-v1-4",
-    "sd-v2-1": "stabilityai/stable-diffusion-2-1",
-    "sdxl": "stabilityai/stable-diffusion-xl-base-1.0",
+    "sd-tiny": "segmind/tiny-sd",
+    "sd-small": "OFA-Sys/small-stable-diffusion-v0",
+    "sd-turbo": "stabilityai/sd-turbo",
 }
 
 
 def load_model(model_key: str) -> DiffusionPipeline:
     model_id = MODEL_REGISTRY[model_key]
-    pipeline = DiffusionPipeline.from_pretrained(
-        model_id,
-        torch_dtype=torch.float16,
-    )
+    try:
+        # fp16 variant halves the download/disk size vs. the fp32 weights
+        pipeline = DiffusionPipeline.from_pretrained(
+            model_id,
+            torch_dtype=torch.float16,
+            variant="fp16",
+        )
+    except (ValueError, EnvironmentError):
+        pipeline = DiffusionPipeline.from_pretrained(
+            model_id,
+            torch_dtype=torch.float16,
+        )
     pipeline = pipeline.to("mps")
     return pipeline
 

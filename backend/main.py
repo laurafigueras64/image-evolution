@@ -8,9 +8,9 @@ from backend.models import load_all_models
 from backend.generator import generate_image
 
 MODEL_LABELS = {
-    "sd-v1-4": "2022 · SD v1.4",
-    "sd-v2-1": "2022 · SD v2.1",
-    "sdxl":    "2023 · SDXL",
+    "sd-tiny": "Tiny SD (distilled)",
+    "sd-small": "Small SD",
+    "sd-turbo": "SD-Turbo (1-step)",
 }
 
 pipelines = {}
@@ -41,7 +41,7 @@ class GenerateRequest(BaseModel):
 async def generate(request: GenerateRequest):
     results = []
     for model_key, label in MODEL_LABELS.items():
-        image_base64 = generate_image(pipelines[model_key], request.prompt)
+        image_base64 = generate_image(pipelines[model_key], request.prompt, model_key)
         results.append({
             "model": model_key,
             "label": label,

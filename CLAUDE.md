@@ -12,9 +12,15 @@ of image generation models.
 - Vanilla HTML, CSS, and JavaScript — no frameworks
 
 ## Models (loaded once at server startup, in quality order)
-1. CompVis/stable-diffusion-v1-4
-2. stabilityai/stable-diffusion-2-1
-3. stabilityai/stable-diffusion-xl-base-1.0
+Chosen to keep local disk usage and MPS inference time low — full-size
+SD 1.4/2.1/SDXL was too slow and too heavy to load on this machine.
+1. segmind/tiny-sd — distilled, smallest and fastest, lowest quality
+2. OFA-Sys/small-stable-diffusion-v0 — compressed SD, mid quality
+3. stabilityai/sd-turbo — step-distilled from SD 2.1; highest quality
+   despite running in 1 inference step (guidance_scale must be 0.0)
+
+Loaded with `variant="fp16"` where available so only the fp16 weights are
+downloaded, roughly halving disk usage vs. the fp32 checkpoints.
 
 ## Project Structure
 image-evolution/
