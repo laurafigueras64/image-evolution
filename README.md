@@ -35,6 +35,20 @@ checkpoints.
 `backend/generator.py`) — using the default guidance scale on this model
 produces broken/oversaturated images, it's not optional.
 
+### Generation parameters per model
+
+Step count and resolution are deliberately tuned per model in
+`GENERATION_PARAMS` (`backend/generator.py`) to make the quality gap
+between them visible, not just to save time — running all three at the
+same step count and resolution makes them look too similar, since they're
+all SD-family models under the hood:
+
+| Model | Steps | Resolution |
+|---|---|---|
+| `sd-tiny` | 6 | 256×256 |
+| `sd-small` | 12 | 384×384 |
+| `sd-turbo` | 1 (fixed, step-distilled) | 512×512 (pipeline default) |
+
 ## Project structure
 
 ```
@@ -143,6 +157,10 @@ EOF
 - Swapping in smaller/distilled models trades some image quality and
   prompt fidelity for speed and disk space — this is a demo/showcase app,
   not a quality benchmark.
+- `sd-tiny` and `sd-small` are deliberately run at reduced steps/resolution
+  (see [Generation parameters per model](#generation-parameters-per-model))
+  to widen the visible quality gap — this is a presentation choice, not
+  their best achievable output.
 - Old cached weights from earlier experiments (full SD 1.4, Openjourney
   v4) may still be sitting in `~/.cache/huggingface/hub` if you've run
   this project before with a different model lineup. Safe to delete if
