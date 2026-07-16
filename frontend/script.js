@@ -1,7 +1,7 @@
 const btn = document.getElementById("generate-btn");
 const promptInput = document.getElementById("prompt");
 
-const MODEL_ORDER = ["sd-v1-4", "sd-v2-1", "sdxl"];
+const MODEL_ORDER = ["sd-tiny", "sd-small", "sd-turbo"];
 
 function getCard(modelKey) {
   return document.getElementById(`card-${modelKey}`);
